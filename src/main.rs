@@ -11,7 +11,6 @@ const RESET_FILE_PATH: &str = "
 127.0.0.1		localhost
 255.255.255.255		broadcasthost
 ::1                          localhost
-127.0.0.1		www.youtube.com
 ";
 const FILE_PATH: &str = "/etc/hosts";
 //const LOCALHOST: &str = "127.0.0.1";
@@ -22,14 +21,7 @@ fn main() -> Result<(), std::io::Error> {
     if arguments.len() < 1 {
         panic!("arguments must be defined");
     }
-    if arguments
-        .get(1)
-        .expect("No arguments provided")
-        .to_lowercase()
-        == "help"
-    {
-        utils::utils::help();
-    }
+    utils::utils::handle_args(&argument);
     let res_flux = utils::utils::execute_flux_cache();
     if res_flux.is_err() {
         return res_flux;
