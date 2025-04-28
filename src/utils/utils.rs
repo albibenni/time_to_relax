@@ -14,6 +14,26 @@ pub fn help() -> () {
     println!("As last argument provide the Pomodoro timer in minutes until then the websites are blocked");
 }
 
+// pub fn startup_setup() -> Result<(), std::io::Error> {
+//     let _res = std::fs::write(FILE_PATH, &file_reset);
+// }
+
+pub fn handle_args(arguments: &Vec<String>) {
+    let first_arg = &arguments
+        .get(1)
+        .expect("No arguments provided")
+        .to_lowercase();
+    //TODO: save prev /etc/hosts/ config - for the addiction site
+    if first_arg == "help" {
+        help();
+    }
+    if first_arg == "setup" {
+        // start setup /etc/hosts file
+        // consider using - ?
+    }
+    //TODO: change with match
+}
+
 /// Resets a file's content and refreshes the flux cache
 ///
 /// # Arguments
