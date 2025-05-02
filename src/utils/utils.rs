@@ -19,19 +19,28 @@ pub fn help() -> () {
 // }
 
 pub fn handle_args(arguments: &Vec<String>) {
-    let first_arg = &arguments
+    let first_arg: String = arguments
         .get(1)
         .expect("No arguments provided")
         .to_lowercase();
     //TODO: save prev /etc/hosts/ config - for the addiction site
-    if first_arg == "help" {
-        help();
+    match first_arg.to_lowercase().as_str() {
+        "help" => help(),
+        "setup" => run_setup(arguments),
+        //TODO: change with match
+        _ => panic!("Not covered"),
     }
-    if first_arg == "setup" {
-        // start setup /etc/hosts file
-        // consider using - ?
+}
+
+fn run_setup(arguments: &Vec<String>) {
+    for i in 2..arguments.len() {
+        let arg = arguments.get(i).expect("Something went wrong");
+
+        if !arg.contains(".") {
+            panic!("You didn't insert an domain extension");
+        }
+        println!("fixx {}, arg, {}", i, arguments.get(i).unwrap());
     }
-    //TODO: change with match
 }
 
 /// Resets a file's content and refreshes the flux cache
